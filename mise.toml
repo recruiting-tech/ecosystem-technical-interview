@@ -1,0 +1,9 @@
+# Tool versions live in .tool-versions (asdf-compatible).
+# This file holds mise-specific *settings* — most importantly, forcing
+# prebuilt Python binaries so coworkers don't need libssl-dev / libffi-dev /
+# etc. to bootstrap. Without this, older mise releases (and asdf) fall back
+# to compiling CPython from source via python-build, which is the "lib error"
+# that's been biting the team.
+
+[settings]
+python.compile = false

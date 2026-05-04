@@ -1,0 +1,105 @@
+openapi: 3.0.3
+info:
+  title: api-svc
+  description: |
+    Reference data service for camps. Owns the source of truth for camp records
+    and emits Camp.V1 events on create/update.
+  version: "1.0.0"
+servers:
+  - url: http://localhost:8001
+paths:
+  /camps:
+    get:
+      operationId: listCamps
+      summary: List camps
+      parameters:
+        - in: query
+          name: sport
+          schema: { type: string }
+        - in: query
+          name: limit
+          schema: { type: integer, default: 50, minimum: 1, maximum: 200 }
+        - in: query
+          name: offset
+          schema: { type: integer, default: 0, minimum: 0 }
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CampList'
+    post:
+      operationId: createCamp
+      summary: Create a camp
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CampInput'
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Camp'
+  /camps/{id}:
+    parameters:
+      - in: path
+        name: id
+        required: true
+        schema: { type: string, format: uuid }
+    get:
+      operationId: getCamp
+      summary: Fetch a camp
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Camp' }
+        '404':
+          description: Not found
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Error' }
+components:
+  schemas:
+    CampInput:
+      type: object
+      required: [name, sport, location, capacity, start_date, end_date]
+      properties:
+        name:       { type: string }
+        sport:      { type: string }
+        location:   { type: string }
+        capacity:   { type: integer, minimum: 1 }
+        start_date: { type: string, format: date }
+        end_date:   { type: string, format: date }
+    Camp:
+      type: object
+      required: [id, name, sport, location, capacity, start_date, end_date, created_at, updated_at]
+      properties:
+        id:         { type: string, format: uuid }
+        name:       { type: string }
+        sport:      { type: string }
+        location:   { type: string }
+        capacity:   { type: integer }
+        start_date: { type: string, format: date }
+        end_date:   { type: string, format: date }
+        created_at: { type: string, format: date-time }
+        updated_at: { type: string, format: date-time }
+    CampList:
+      type: object
+      required: [items, limit, offset]
+      properties:
+        items:  { type: array, items: { $ref: '#/components/schemas/Camp' } }
+        limit:  { type: integer }
+        offset: { type: integer }
+    Error:
+      type: object
+      required: [code, message]
+      properties:
+        code:    { type: string }
+        message: { type: string }

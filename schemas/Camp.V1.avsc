@@ -1,0 +1,16 @@
+{
+  "type": "record",
+  "name": "Camp",
+  "namespace": "com.imgacademy.api.events",
+  "doc": "A camp reference record. Emitted on create and update.",
+  "fields": [
+    { "name": "id",         "type": "string", "doc": "UUID" },
+    { "name": "name",       "type": "string" },
+    { "name": "sport",      "type": "string" },
+    { "name": "location",   "type": "string" },
+    { "name": "capacity",   "type": "int" },
+    { "name": "start_date", "type": { "type": "int",  "logicalType": "date" } },
+    { "name": "end_date",   "type": { "type": "int",  "logicalType": "date" } },
+    { "name": "occurred_at","type": { "type": "long", "logicalType": "timestamp-millis" } }
+  ]
+}

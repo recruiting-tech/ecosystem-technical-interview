@@ -1,0 +1,13 @@
+{
+  "type": "record",
+  "name": "AthleteCreated",
+  "namespace": "com.imgacademy.athlete.events",
+  "doc": "Emitted when a new athlete account is created. Carries identifiers and minimal profile data only — never PII (email, DOB, phone). PII lives in athlete-svc and is fetched on demand.",
+  "fields": [
+    { "name": "id",          "type": "string", "doc": "athlete UUID" },
+    { "name": "first_name",  "type": "string" },
+    { "name": "last_name",   "type": "string" },
+    { "name": "sport",       "type": "string" },
+    { "name": "occurred_at", "type": { "type": "long", "logicalType": "timestamp-millis" } }
+  ]
+}

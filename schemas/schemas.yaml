@@ -1,0 +1,28 @@
+# Schema catalog. Single source of truth for which Avro schemas back which
+# topics, and what compatibility policy applies to each subject.
+#
+# Subject naming follows Confluent's TopicNameStrategy: `<topic>-value`.
+# Compatibility values: BACKWARD | BACKWARD_TRANSITIVE | FORWARD | FORWARD_TRANSITIVE | FULL | FULL_TRANSITIVE | NONE.
+#
+# Apply: `make register-schemas`  (registers each schema and sets its compat policy)
+# Verify: `make check-compat`     (asks SR whether on-disk schemas would be a compatible next version)
+
+schemas:
+  - subject: Camp.V1-value
+    file: Camp.V1.avsc
+    compatibility: BACKWARD
+  - subject: AthleteCreated.V1-value
+    file: AthleteCreated.V1.avsc
+    compatibility: BACKWARD
+
+topics:
+  - name: Camp.V1
+    schema_value: Camp.V1-value
+    key: string
+    config:
+      cleanup.policy: compact
+    partitions: 3
+  - name: AthleteCreated.V1
+    schema_value: AthleteCreated.V1-value
+    key: string
+    partitions: 3
