@@ -1,0 +1,42 @@
+# Build & coverage
+*.out
+*.html
+*.tsbuildinfo
+coverage*
+dist/
+build/
+node_modules/
+
+# Env / IDE
+.env
+.env.local
+.idea/
+.vscode/
+*.swp
+.DS_Store
+
+# Go
+/apps/*/bin/
+/apps/*/vendor/
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Node
+.next/
+.cache/
+.turbo/
+.parcel-cache/
+
+# Generated (keep checked-in originals; ignore regenerated artifacts)
+apps/api-svc/internal/api/oapi_gen/
+apps/api-svc/ent/runtime/
+apps/web/app/lib/api/types/
+
+# Docker
+*.pid

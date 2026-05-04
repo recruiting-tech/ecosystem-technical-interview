@@ -1,0 +1,14 @@
+{
+  "mappings": {
+    "properties": {
+      "id":         { "type": "keyword" },
+      "name":       { "type": "text" },
+      "sport":      { "type": "keyword" },
+      "location":   { "type": "text" },
+      "capacity":   { "type": "integer" },
+      "start_date": { "type": "date", "format": "yyyy-MM-dd||strict_date_optional_time" },
+      "end_date":   { "type": "date", "format": "yyyy-MM-dd||strict_date_optional_time" },
+      "indexed_at": { "type": "date" }
+    }
+  }
+}

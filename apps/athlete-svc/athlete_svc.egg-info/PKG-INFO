@@ -1,0 +1,16 @@
+Metadata-Version: 2.4
+Name: athlete-svc
+Version: 0.1.0
+Summary: Athlete reference service. Owns athlete + registration data; publishes events via transactional outbox.
+Requires-Python: <4.0,>=3.12
+Requires-Dist: django<6.0,>=5.2
+Requires-Dist: djangorestframework<4.0,>=3.15
+Requires-Dist: psycopg[binary]>=3.2
+Requires-Dist: confluent-kafka[avro,schema-registry]>=2.5
+Requires-Dist: fastavro>=1.9
+Requires-Dist: gunicorn>=23.0
+Requires-Dist: python-dotenv>=1.0
+Provides-Extra: dev
+Requires-Dist: pytest>=8.3; extra == "dev"
+Requires-Dist: pytest-django>=4.9; extra == "dev"
+Requires-Dist: ruff>=0.6; extra == "dev"
